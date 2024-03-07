@@ -23,7 +23,7 @@ from mymorpho.views import ImageViewSet
 
 router = DefaultRouter()
 router.register(r'images', ImageViewSet)
-router.register(r'ClassedIms', )
+
 
 urlpatterns = [
     path('', include(router.urls)),
