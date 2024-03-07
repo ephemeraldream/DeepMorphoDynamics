@@ -50,7 +50,7 @@
     <body>
     <div class="label-studio-container">
         <header>
-            <h1>MorphoDynamics</h1>
+            <h1>MorphoDynamics </h1>
         </header>
         <main>
             <aside>
