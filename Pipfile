@@ -11,6 +11,7 @@ djangorestframework = "*"
 pygments = "*"
 pillow = "*"
 torch = "*"
+django-cors-headers = "*"
 
 [dev-packages]
 

@@ -20,7 +20,8 @@ from django.urls import include
 from django import views
 from rest_framework.routers import DefaultRouter
 from mymorpho.views import ImageViewSet
-
+from django.conf import settings
+from django.conf.urls.static import static
 router = DefaultRouter()
 router.register(r'images', ImageViewSet)
 
@@ -32,4 +33,4 @@ urlpatterns = [
 
 
 
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

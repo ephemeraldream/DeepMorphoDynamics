@@ -2,7 +2,7 @@
 	import {onMount} from 'svelte';
 	let imageUrl = '';
 	onMount(async () => {
-		const response = await fetch('http://localhost:8000/api/images/1/');
+		const response = await fetch('http://localhost:8000/api/images/6/');
 		const data = await response.json();
 		imageUrl = data.image
 	});
