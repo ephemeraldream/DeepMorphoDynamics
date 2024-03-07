@@ -18,8 +18,18 @@ from django.contrib import admin
 from django.urls import path
 from django.urls import include
 from django import views
+from rest_framework.routers import DefaultRouter
+from mymorpho.views import ImageViewSet
+
+router = DefaultRouter()
+router.register(r'images', ImageViewSet)
+router.register(r'ClassedIms', )
 
 urlpatterns = [
+    path('', include(router.urls)),
     path('admin/', admin.site.urls),
+    path('api/', include((router.urls, 'mymorpho'), namespace='mymorpho'))
+
+
 
 ]
