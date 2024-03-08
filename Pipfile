@@ -12,6 +12,7 @@ pygments = "*"
 pillow = "*"
 torch = "*"
 django-cors-headers = "*"
+drf-spectacular = "*"
 
 [dev-packages]
 
