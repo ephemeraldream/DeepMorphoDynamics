@@ -1,31 +1,30 @@
-from rest_framework import serializers
-from .models import ImageWithClassificationPredictions, Holes, Images
-from rest_framework.serializers import (
-    Serializer,
-    ListSerializer,
-    IntegerField,
-    FloatField,
-    ImageField
+from mymorpho.models.cycle_type import CycleType
+from .models.image_with_classification_predictions import (
+    ImageWithClassificationPredictions,
 )
+from .models.images import Images
+from rest_framework import serializers
+
 
 class ImagesSerializer(serializers.ModelSerializer):
     class Meta:
         model = Images
-        fields = ['id', 'subgroup_id', 'image']
-        read_only_fields = ('id', )
+        fields = ["id", "subgroup_id", "image"]
+
 
 class ClassificationSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = ImageWithClassificationPredictions
-        fields = ['id', 'group_id', 'image', 'locations', 'classification', 'dimension']
-        read_only_fields = ('id', )
-
+        fields = ["id", "group_id", "image", "locations", "classification", "dimension"]
 
 
 class HolesSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = ImageWithClassificationPredictions
-        fields = ['id', 'group_id', 'subgroup_id', 'image', 'condition']
-        read_only_fields = ('id', )
+        fields = ["id", "group_id", "subgroup_id", "image", "condition"]
+
+
+class CycleTypeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CycleType
+        fields = ("ct_id", "ct_tname")
