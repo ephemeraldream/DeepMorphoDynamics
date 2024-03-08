@@ -1,0 +1,120 @@
+   * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Базовые стили */
+body {
+  font-family: sans-serif;
+  font-size: 16px;
+  color: #333;
+}
+
+.label-studio-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+header {
+  background-color: #222;
+  color: #fff;
+  padding: 10px;
+  text-align: center;
+}
+
+header h1 {
+  margin: 0;
+}
+
+main {
+  flex: 1;
+  display: flex;
+}
+
+aside {
+  width: 200px;
+  background-color: #f5f5f5;
+  padding: 10px;
+}
+
+aside ul {
+  list-style: none;
+  padding: 0;
+}
+
+aside ul li {
+  margin-bottom: 10px;
+}
+
+aside ul li a {
+  text-decoration: none;
+  color: #333;
+}
+
+aside .tools {
+  margin-top: 10px;
+}
+
+aside .tools button {
+  margin-right: 10px;
+}
+
+section.content-area {
+  flex: 1;
+  padding: 10px;
+}
+
+section.content-area img {
+  max-width: 100%;
+}
+
+section.content-area .annotations {
+  margin-top: 10px;
+}
+
+section.content-area .annotations label {
+  margin-right: 10px;
+}
+
+section.content-area .annotations select {
+  padding: 5px;
+}
+
+section.content-area .annotations button {
+  margin-top: 10px;
+}
+
+/* Дополнительные стили */
+/* ... */
+
+/* Измененные стили */
+body {
+  background-color: #f7f7f7;
+}
+
+header {
+  background-color: #4d4d4d;
+}
+
+aside {
+  background-color: #fff;
+}
+
+aside ul li a {
+  color: #4d4d4d;
+}
+
+aside .tools button {
+  background-color: #4d4d4d;
+  color: #fff;
+}
+
+section.content-area {
+  background-color: #f5f5f5;
+}
+
+section.content-area .annotations {
+  background-color: #fff;
+}

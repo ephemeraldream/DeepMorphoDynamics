@@ -2,14 +2,12 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from rest_framework.response import Response
 from rest_framework import viewsets
-from .models import Images, ImageWithClassificationPredictions
+from .models import Images, ImageWithClassificationPredictions, Holes
 from .serializers import ImagesSerializer, ClassificationSerializer
 from rest_framework.permissions import AllowAny
 from rest_framework.decorators import api_view
 
-def members(request):
-    return HttpResponse("Hello world!")
-# Create your views here.
+
 
 class ImageViewSet(viewsets.ModelViewSet):
     queryset = Images.objects.all()
