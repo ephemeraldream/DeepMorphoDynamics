@@ -1,42 +1,24 @@
 <script>
     import {onMount} from 'svelte';
+    import './style.css';
+    import ImageUploader from './imageUploader.svelte';
+    import LabelFetcher from "./LabelFetcher.svelte";
 
     let imageUrl = '';
     let imageFile;
+    let imageSrc;
+    let datA;
     onMount(async () => {
-        const response = await fetch('http://localhost:8000/api/images/6/');
-        const data = await response.json();
-        imageUrl = data.image
+        const response = await fetch('http://localhost:8000/api/combined_data/well_timeline_frame/'+ 500);
+        datA = await response.json();
+        datA = datA.wtf_frame
+        imageSrc = `data:image/bmp;base64,${datA}`;
     });
 
-    async function uploadImage(event) {
-        const file = event.target.files[0];
-        if (file) {
-            const formData = new FormData();
-            formData.append('image', file);
 
-            try {
-                const response = await fetch('http://localhost:8000/api/images/', {
-                    method: 'POST',
-                    body: formData,
-                    // If you're using authentication, you may need to add headers for the token
-                    // headers: {
-                    //   'Authorization': 'Token your_token_here',
-                    // },
-                });
 
-                if (response.ok) {
-                    const data = await response.json();
-                    console.log('Image uploaded successfully:', data);
-                    // Handle the response data as needed
-                } else {
-                    console.error('Upload failed:', response.status, response.statusText);
-                }
-            } catch (error) {
-                console.error('Error uploading image:', error);
-            }
-        }
-    }
+
+
 
 </script>
 
@@ -55,8 +37,8 @@
         <main>
             <aside>
                 <ul>
-                    <li><a href="#">Project 1</a></li>
-                    <li><a href="#">Project 2</a></li>
+                    <li><a href="#">TODO 1</a></li>
+                    <li><a href="#">TODO 2</a></li>
                     <li><a href="#">Settings</a></li>
                 </ul>
                 <div class="tools">
@@ -66,9 +48,9 @@
                 </div>
             </aside>
             <section class="content-area">
-                <img alt="Image to be annotated" src="image.jpg"/>
+                <img src={imageSrc} alt="Image to be annotated"/>
                 <div class="annotations">
-                    <label for="label-1">Class:</label>
+                    <label for="label-1">TODO:</label>
                     <select id="label-1">
                         <option value="">Select class...</option>
                         <option value="cat">Cat</option>
@@ -76,6 +58,10 @@
                         <option value="bird">Bird</option>
                     </select>
                     <button>Add Annotation</button>
+                    <ImageUploader/>
+                    <LabelFetcher/>
+                    ### TODO
+
                 </div>
             </section>
         </main>

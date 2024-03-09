@@ -2,7 +2,7 @@ from django.db import models
 
 
 class WellTimelineFrames(models.Model):
-    wtf_wtl_id = models.IntegerField(verbose_name="Идентификатор (номер) серии")
+    wtf_wtl_id = models.IntegerField(primary_key=True, verbose_name="Идентификатор (номер) серии")
     wtf_ed_uuid = models.UUIDField(verbose_name="Идентификатор эмбриона")
     wtf_rel_focus = models.IntegerField(
         verbose_name="Относительная фокальная плоскость"

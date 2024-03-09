@@ -20,7 +20,7 @@ from django.urls import include
 from django.conf import settings
 from django.conf.urls.static import static
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
-
+from mymorpho.views.first_network import gen_labels
 
 urlpatterns = [
     path("api/admin/", admin.site.urls),
@@ -31,4 +31,5 @@ urlpatterns = [
         SpectacularSwaggerView.as_view(url_name="schema"),
         name="swagger",
     ),
+    path("api/methods/networks/gen_labels/<int:id>/", gen_labels, name='gen_labels'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
