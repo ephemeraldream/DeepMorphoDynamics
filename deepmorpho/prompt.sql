@@ -110,7 +110,7 @@ CREATE TABLE well_timeline
     wtl_gas_co2 character varying NOT NULL,             -- Данные по CO2 в камере культивирования
     wtl_co2_concentration real,                         -- Концентрация CO2 в камере культивирования
     wtl_co2_flow real,                                  -- Газовый поток CO2 в камере культивирования
-    wtl_frame_dt timestamp without time zone NOT NULL,	-- Дата и время получения кадра 
+    wtl_frame_dt timestamp without time zone NOT NULL,	-- Дата и время получения кадра
     CONSTRAINT well_tl_pk PRIMARY KEY (wtl_id, wtl_ed_uuid),
     CONSTRAINT embryo_data_well_timeline_fk FOREIGN KEY (wtl_ed_uuid)
         REFERENCES embryo_data (ed_uuid) MATCH SIMPLE

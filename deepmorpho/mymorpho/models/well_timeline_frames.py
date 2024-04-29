@@ -18,3 +18,5 @@ class WellTimelineFrames(models.Model):
         unique_together = [["wtf_wtl_id", "wtf_ed_uuid", "wtf_rel_focus"]]
         verbose_name = "Кадры серии изображений"
         verbose_name_plural = "Кадры серий изображений"
+
+

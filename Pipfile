@@ -14,6 +14,11 @@ torch = "*"
 django-cors-headers = "*"
 drf-spectacular = "*"
 torchvision = "*"
+mysql = "*"
+pandas = "*"
+timm = "*"
+scikit-learn = "*"
+matplotlib = "*"
 
 [dev-packages]
 

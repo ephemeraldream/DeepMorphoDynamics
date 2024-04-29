@@ -100,7 +100,7 @@ WSGI_APPLICATION = "deepmorpho.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "combined_dump.sql",
+        "NAME": BASE_DIR / "so_deep.db",
     }
 }
 

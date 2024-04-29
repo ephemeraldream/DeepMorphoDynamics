@@ -8,6 +8,6 @@ from rest_framework.viewsets import ModelViewSet
 
 
 class WellTimelineFrameViewSet(ModelViewSet):
-    queryset = WellTimelineFrames.objects.all().filter(wtf_rel_focus=3)
+    queryset = WellTimelineFrames.objects.all().filter(wtf_rel_focus=0)
     serializer_class = WellTimelineFramesSerializer
     permission_classes = (AllowAny,)
