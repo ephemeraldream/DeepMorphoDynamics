@@ -10,11 +10,12 @@ from .models.images import Images
 from rest_framework import serializers
 from rest_framework.serializers import (
     Serializer,
+    ImageField,
     ListSerializer,
     IntegerField,
     FloatField,
-    ImageField,
-    ModelSerializer
+    ListField,
+    ModelSerializer,
 )
 
 
@@ -41,10 +42,18 @@ class CycleTypeSerializer(serializers.ModelSerializer):
         model = CycleType
         fields = ("ct_id", "ct_tname")
 
+
 class WellTimelineFramesSerializer(serializers.ModelSerializer):
     class Meta:
         model = WellTimelineFrames
-        fields = ("wtf_wtl_id", "wtf_ed_uuid", "wtf_rel_focus", "wtf_frame", "wtf_dif", "wtf_stabilized")
+        fields = (
+            "wtf_wtl_id",
+            "wtf_ed_uuid",
+            "wtf_rel_focus",
+            "wtf_frame",
+            "wtf_dif",
+            "wtf_stabilized",
+        )
 
 
 class GetLabelsSerializer(Serializer):
@@ -54,21 +63,14 @@ class GetLabelsSerializer(Serializer):
     image = ImageField(max_length=None, use_url=True)
 
     class Meta:
-        fields = (
-            "classification_pred",
-            "regression_pred",
-            "hole_pred",
-            "image"
-        )
+        fields = ("classification_pred", "regression_pred", "hole_pred", "image")
 
 
 class EmbryoSerializer(ModelSerializer):
     class Meta:
-        fields = (
-            "id",
-
-        )
+        fields = ("id",)
         model = Embryo
+
 
 class EmbryoInTSerializer(ModelSerializer):
     class Meta:
@@ -82,6 +84,7 @@ class EmbryoInTSerializer(ModelSerializer):
         )
         model = EmbryoInT
 
+
 class WholeImageSerializer(ModelSerializer):
     class Meta:
         fields = (
@@ -92,3 +95,9 @@ class WholeImageSerializer(ModelSerializer):
         read_only_fields = ("time",)
         model = WholeImage
 
+
+class WholeImagesSerializer(Serializer):
+    images = ListField(child=ImageField())
+
+    class Meta:
+        fields = ("images",)

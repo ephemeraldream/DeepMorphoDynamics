@@ -1,0 +1,13 @@
+alias r := run
+alias m := migrate
+alias mm := makemigrations
+
+run:
+   ./manage.py runserver localhost:8000
+
+makemigrations *args:
+   ./manage.py makemigrations {{args}}
+    
+migrate *args:
+   ./manage.py migrate {{args}}
+

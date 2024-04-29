@@ -1,20 +1,20 @@
-import torch
-
-from rest_framework.permissions import AllowAny
-from rest_framework.parsers import MultiPartParser
-from rest_framework.decorators import api_view, parser_classes, permission_classes
-
+from dataclasses import dataclass
 from pathlib import Path
-from PIL import Image as PLImage
-from torchvision.transforms.functional import pil_to_tensor
+
+import torch
 from dl_folder.models import cnn_model
-from mymorpho.serializers import GetLabelsSerializer
-from mymorpho.serializers import ImagesSerializer
-from mymorpho.model import WholeImage
-from ..models.images import Images
-from rest_framework.request import Request
-from rest_framework.response import Response
-from drf_spectacular.utils import extend_schema
+from mymorpho.models.whole_image import WholeImage
+from PIL import Image as PILmage
+from torchvision.transforms.functional import pil_to_tensor
+
+
+@dataclass
+class Coordinates:
+    classification_pred: list
+    regression_pred: list
+    hole_pred: list
+    pil_image: PILmage
+    tensor: torch.Tensor
 
 
 model = cnn_model.EmbryoModel()
@@ -24,12 +24,10 @@ model.load_state_dict(
 model.eval()
 
 
-def gen_labels(id: int):
-
-    img = WholeImage.objects.get(id=id).image
-
-    processeed = PLImage.open(img)
-    tensor = pil_to_tensor(processeed)
+def gen_labels(inst: WholeImage) -> PILmage:
+    image = PILmage.open(inst.image)
+    tensor = pil_to_tensor(image)
+    tensor_source = tensor.clone().detach()
     tensor = tensor / 255
     tensor = tensor.unsqueeze(0)
 
@@ -45,13 +43,4 @@ def gen_labels(id: int):
     reg_pred = reg_pred.tolist()
     hole_pred = 1 if torch.ge(hole_pred, 0.5).item() is False else 0
 
-    return Response(
-        GetLabelsSerializer(
-            {
-                "classification_pred": cls_pred,
-                "regression_pred": reg_pred,
-                "hole_pred": hole_pred,
-                "image": processeed,
-            }
-        ).data
-    )
+    return Coordinates(cls_pred, reg_pred, hole_pred, image, tensor_source)
