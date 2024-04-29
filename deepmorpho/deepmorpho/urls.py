@@ -21,6 +21,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 from mymorpho.views.first_network import gen_labels
+from mymorpho.views.cut_images import cut_images
 
 urlpatterns = [
     path("api/admin/", admin.site.urls),
@@ -32,4 +33,5 @@ urlpatterns = [
         name="swagger",
     ),
     path("api/methods/networks/gen_labels/<int:id>/", gen_labels, name='gen_labels'),
+    path("api/methods/networks/cut_images/", cut_images, name='cut_images')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

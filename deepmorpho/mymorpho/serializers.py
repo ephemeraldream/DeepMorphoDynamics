@@ -1,5 +1,8 @@
 from mymorpho.models.cycle_type import CycleType
 from mymorpho.models.well_timeline_frames import WellTimelineFrames
+from mymorpho.models.embryo import Embryo
+from mymorpho.models.whole_image import WholeImage
+from mymorpho.models.embryo_in_t import EmbryoInT
 from .models.image_with_classification_predictions import (
     ImageWithClassificationPredictions,
 )
@@ -10,6 +13,8 @@ from rest_framework.serializers import (
     ListSerializer,
     IntegerField,
     FloatField,
+    ImageField,
+    ModelSerializer
 )
 
 
@@ -46,10 +51,43 @@ class GetLabelsSerializer(Serializer):
     classification_pred = ListSerializer(child=IntegerField())
     regression_pred = ListSerializer(child=ListSerializer(child=FloatField()))
     hole_pred = IntegerField()
+    image = ImageField(max_length=None, use_url=True)
 
     class Meta:
         fields = (
             "classification_pred",
             "regression_pred",
             "hole_pred",
+            "image"
         )
+
+
+class EmbryoSerializer(ModelSerializer):
+    class Meta:
+        fields = (
+            "id",
+
+        )
+        model = Embryo
+
+class EmbryoInTSerializer(ModelSerializer):
+    class Meta:
+        fields = (
+            "id",
+            "image",
+            "source_image",
+            "embryo",
+            "class_type",
+            "well_number",
+        )
+        model = EmbryoInT
+
+class WholeImageSerializer(ModelSerializer):
+    class Meta:
+        fields = (
+            "id",
+            "image",
+            "time",
+        )
+        model = WholeImage
+

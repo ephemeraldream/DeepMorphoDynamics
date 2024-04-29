@@ -19,6 +19,8 @@ pandas = "*"
 timm = "*"
 scikit-learn = "*"
 matplotlib = "*"
+opencv-python = "*"
+pytorch-cuda = "*"
 
 [dev-packages]
 

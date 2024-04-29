@@ -56,6 +56,7 @@ def gen_labels(_request: Request, id: int) -> Response:
                 "classification_pred": cls_pred,
                 "regression_pred": reg_pred,
                 "hole_pred": hole_pred,
+                "image": processeed,
             }
         ).data
     )
