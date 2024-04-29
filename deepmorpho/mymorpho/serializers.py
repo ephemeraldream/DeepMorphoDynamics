@@ -89,5 +89,6 @@ class WholeImageSerializer(ModelSerializer):
             "image",
             "time",
         )
+        read_only_fields = ("time",)
         model = WholeImage
 

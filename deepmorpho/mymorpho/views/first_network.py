@@ -10,6 +10,7 @@ from torchvision.transforms.functional import pil_to_tensor
 from dl_folder.models import cnn_model
 from mymorpho.serializers import GetLabelsSerializer
 from mymorpho.serializers import ImagesSerializer
+from mymorpho.model import WholeImage
 from ..models.images import Images
 from rest_framework.request import Request
 from rest_framework.response import Response
@@ -23,16 +24,10 @@ model.load_state_dict(
 model.eval()
 
 
-@extend_schema(
-    methods=["POST"],
-    responses=GetLabelsSerializer,
-)
-@permission_classes([AllowAny])
-@parser_classes([MultiPartParser])
-@api_view(["POST"])
-def gen_labels(_request: Request, id: int) -> Response:
-    image_object = Images.objects.get(id=id)
-    img = image_object.image
+def gen_labels(id: int):
+
+    img = WholeImage.objects.get(id=id).image
+
     processeed = PLImage.open(img)
     tensor = pil_to_tensor(processeed)
     tensor = tensor / 255
